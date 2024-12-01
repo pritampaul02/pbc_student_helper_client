@@ -1,10 +1,13 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { Link } from "expo-router";
 
 const Page = () => {
     return (
         <View>
-            <Text>Profile Page</Text>
+            <Link href={"/login"}>
+                <Text>Login</Text>
+            </Link>
         </View>
     );
 };

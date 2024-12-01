@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import { useFonts } from "expo-font";
-import { useColorScheme } from "react-native";
+import { StatusBar, useColorScheme } from "react-native";
 import { SplashScreen, Stack } from "expo-router";
 import * as NavigationBar from "expo-navigation-bar";
 
@@ -12,6 +12,8 @@ import {
     DefaultTheme,
     ThemeProvider,
 } from "@react-navigation/native";
+import store from "@/store/store";
+import { Provider } from "react-redux";
 
 // preventing to hide the splash screen upto the all necessity is loaded successfully
 SplashScreen.preventAutoHideAsync();
@@ -42,43 +44,58 @@ export default function RootLayout() {
     }
 
     return (
-        <ThemeProvider
-            value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-        >
-            <Stack initialRouteName="login">
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                <Stack.Screen name="onboarding" />
-                <Stack.Screen
-                    name="showAllHolidays"
-                    options={{
-                        title: "Holiday list",
-                        headerRight: () => (
-                            <Ionicons name="download-outline" size={26} />
-                        ),
-                        presentation: "modal",
-                        animation: "slide_from_bottom",
-                        // headerTitleStyle: {
-                        //     fontFamily: "Nunito",
-                        // },
-                    }}
+        <Provider store={store}>
+            <ThemeProvider
+                value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+            >
+                <StatusBar
+                    backgroundColor={Colors[colorScheme ?? "light"].background}
+                    barStyle={
+                        colorScheme === "dark"
+                            ? "light-content"
+                            : "dark-content"
+                    }
                 />
-                <Stack.Screen
-                    name="login"
-                    options={{
-                        headerTitle: "",
-                        headerShadowVisible: false,
-                        headerTransparent: true,
-                    }}
-                />
-                <Stack.Screen
-                    name="register"
-                    options={{
-                        headerTitle: "",
-                        headerShadowVisible: false,
-                        headerTransparent: true,
-                    }}
-                />
-            </Stack>
-        </ThemeProvider>
+                <Stack initialRouteName="login">
+                    <Stack.Screen
+                        name="(tabs)"
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen name="onboarding" />
+                    <Stack.Screen
+                        name="showAllHolidays"
+                        options={{
+                            title: "Holiday list",
+                            headerRight: () => (
+                                <Ionicons name="download-outline" size={26} />
+                            ),
+                            presentation: "modal",
+                            animation: "slide_from_bottom",
+                            // headerTitleStyle: {
+                            //     fontFamily: "Nunito",
+                            // },
+                        }}
+                    />
+                    <Stack.Screen
+                        name="login"
+                        options={{
+                            headerShown: false,
+                            // headerTitle: "",
+                            // headerShadowVisible: false,
+                            // headerTransparent: true,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="register"
+                        options={{
+                            headerShown: false,
+                            // headerTitle: "",
+                            // headerShadowVisible: false,
+                            // headerTransparent: true,
+                        }}
+                    />
+                </Stack>
+            </ThemeProvider>
+        </Provider>
     );
 }

@@ -1,11 +1,27 @@
-import { StyleSheet, Text, useColorScheme, View } from "react-native";
-import React from "react";
+import {
+    RefreshControl,
+    ScrollView,
+    StyleSheet,
+    Text,
+    useColorScheme,
+    View,
+} from "react-native";
+import React, { useEffect, useState } from "react";
 import CustomCalender from "@/components/CustomCalender";
 import { Colors } from "@/constants/Colors";
 import { Link } from "expo-router";
 
 const Page = () => {
     const colorScheme = useColorScheme();
+
+    // const [refreshing, setRefreshing] = useState(false);
+
+    // const onRefresh = useEffect(() => {
+    //     setRefreshing(true);
+    //     setTimeout(() => {
+    //         setRefreshing(false);
+    //     }, 2000);
+    // }, []);
 
     return (
         <View
@@ -15,6 +31,14 @@ const Page = () => {
             ]}
         >
             <CustomCalender />
+            {/* <ScrollView
+                refreshControl={
+                    <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={onRefresh}
+                    />
+                }
+            > */}
             <Text
                 style={{
                     fontSize: 22,
@@ -27,6 +51,7 @@ const Page = () => {
             <Link href={"/login"}>
                 <Text>Show all</Text>
             </Link>
+            {/* </ScrollView> */}
         </View>
     );
 };

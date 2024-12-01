@@ -26,12 +26,6 @@ const Page = () => {
                 styles.container,
             ]}
         >
-            <Pressable
-                onPress={router.back}
-                style={{ position: "absolute", top: top + 20, left: 20 }}
-            >
-                <Ionicons name="arrow-back" size={24} />
-            </Pressable>
             <Image source={require("@/assets/images/react-logo.png")} />
             <Text
                 style={[

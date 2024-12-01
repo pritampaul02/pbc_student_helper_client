@@ -47,7 +47,10 @@ const LoginPage: FC = () => {
                     source={require("@/assets/animations/studyBoy.json")}
                     autoPlay
                     loop
-                    style={[styles.lottie, { width: width, height: width }]}
+                    style={[
+                        styles.lottie,
+                        { width: width * 0.9, height: width * 0.9 },
+                    ]}
                 />
 
                 {/* Page Title */}
